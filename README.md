@@ -407,6 +407,46 @@ config. They default to:
       memoryPerNode: '30Mi',
     }
 ```
+### Probe for Website Monitoring using Black-Box Exporter
+
+--> Create a file named probe.yaml in manifests directory; Add this in the file;
+
+kind: Probe
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: example-com-website
+  namespace: monitoring
+spec:
+  interval: 60s
+  module: http_2xx
+  prober:
+    url: blackbox-exporter.monitoring.svc.cluster.local:19115
+  targets:
+    staticConfig:
+      static:
+      - http://example.com
+      - https://mail.ionos.com
+
+
+--> Execute this command;
+
+kubectl apply -f probe.yaml
+
+OR
+
+kubectl apply -f manifests/setup
+kubectl apply -f manifests/
+
+--> Access Grafana dashboard and Import this dashboard for website monitoring;
+
+https://grafana.com/grafana/dashboards/13041
+OR
+13041
+
+and load configurations by selecting prometheus as Data Source;
+
+![image](https://user-images.githubusercontent.com/61797840/144377643-3857158e-0f61-4fa7-9f60-b369f1a71a21.png)
+
 
 ### Error retrieving kube-proxy metrics
 
