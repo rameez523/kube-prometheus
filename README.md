@@ -411,6 +411,7 @@ config. They default to:
 
 --> Create a file named probe.yaml in manifests directory; Add this in the file;
 
+```
 kind: Probe
 apiVersion: monitoring.coreos.com/v1
 metadata:
@@ -426,6 +427,8 @@ spec:
       static:
       - http://example.com
       - https://mail.ionos.com
+   ```   
+ 
 
 
 --> Execute this command;
